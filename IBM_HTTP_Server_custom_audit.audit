@@ -2,7 +2,7 @@
 
 	<custom_item>
 		type: FILE_CONTENT_CHECK
-		description: "Check SSL configuration for admin wizard in IBM HTTP Server"
+		description: "IHS_1 Check SSL configuration for admin wizard in IBM HTTP Server"
 		info: "Verifies SSL configuration settings in IBM HTTP Server's httpd.conf"
 		file: /path/to/your/httpd.conf
 		regex: true
@@ -11,12 +11,111 @@
 	
 	<custom_item>
 		type: FILE_CONTENT_CHECK
-		description: "Check for proper AllowOverride settings in IBM HTTP Server"
+		description: "IHS_2 Check for proper AllowOverride settings in IBM HTTP Server"
 		info: "Verifies that critical system-wide settings cannot be overridden by users"
 		file: /path/to/your/httpd.conf
 		regex: true
 		expect: "^[\\s]*[Aa]llowOverride+[Nn]one[\\s]*$"
 		
 	</custom_item>
+	
+	<custom_item>
+		type: FILE_CONTENT_CHECK
+		description: "IHS_3 Check for Basic Authentication setup in IBM HTTP Server"
+		info: "Verifies if Basic Authentication is correctly configured for a directory"
+		file: "/path/to/your/httpd.conf"
+		regex: "true"
+		expect: "^[\\s]*[Aa]uthType+[Bb]asic[\\s]*$"
+	</custom_item>
+	
+	<custom_item>
+		type: FILE_CONTENT_CHECK
+		description: "IHS_4 Check if Single Sign-On (SSO) is enabled in IBM HTTP Server"
+		info: "Verifies if SSO configuration is present and correctly set"
+		file: "/path/to/your/httpd.conf"
+		regex: "true"
+		expect: "^[\\s]*[Ss]SOEnabled+[Oo]n"	
+	</custom_item>
+	
+	<custom_item>
+		type: FILE_CONTENT_CHECK
+		description: "IHS_5 Check HA setup for IBM HTTP Server"
+		info: "Verifies HA configuration consistency across multiple instances"
+		file: "/path/to/loadbalancer/config"
+		regex: "true"
+		expect: "^[\\s]*[Ll]oadBalancerServerList[\\s]*$"	
+	</custom_item>
+	
+	<custom_item>
+		type: FILE_CONTENT_CHECK
+		description: "IHS_6 Verify backup status for IBM HTTP Server document root"
+		info: "Checks if the document root directory is present for backup purposes"
+		file: "/path/to/your/document/root"
+		regex:"^[\\s]*<directory[\\s]*"
+		expect: "^[\\s]*<directory[\\s]*"
+	</custom_item>
+	
+	<custom_item>
+		type: FILE_CONTENT_CHECK
+		description: "IHS_7 Verify access log setup for IBM HTTP Server"
+		info: "Checks if the access log file is present and writable"
+		file: "/path/to/access_log"
+		regex: "^[\\s]*@access_log_path@/logs/access_log[\\s]*$"
+		expect: "^[\\s]*[Aa]ccess_log[\\s]*"
+	</custom_item>
+	
+	<custom_item>
+		type: FILE_CONTENT_CHECK
+		description: "IHS_8 Verify reverse proxy configuration in IBM HTTP Server"
+		info: "Checks if reverse proxy directives (ProxyPass, ProxyPassReverse) are configured"
+		file: "/path/to/your/httpd.conf"
+		regex: "true"
+		expect: "^[\\s]*[Pp]roxyPassReverse[\\s]*"
+	</custom_item>
+	
+	<custom_item>
+		type        : FILE_CONTENT_CHECK
+		description : "IHS_9 Check IBM HTTP Server for Proxy Chaining Configuration"
+		info        : "Checks if proxy chaining is configured in IBM HTTP Server."
+		file		: "/path/to/your/httpd.conf"
+		regex       : "^[\\s]*ProxyPass .[\\s]*"
+		expect      : "^[\\s]*ProxyPass[\\s]*"
+	</custom_item>
+	
+	<custom_item>
+		type        : FILE_CONTENT_CHECK
+		description : "IHS_10 Check IBM HTTP Server for Password Protection"
+		info        : "Checks if password protection (authentication) is configured for sensitive directories."
+		file		: "/path/to/your/httpd.conf"
+		regex       : "^[\\s]*AuthType .^[\\s]*"
+		expect      : "^[\\s]*[Aa]uthType+[Bb]asic^[\\s]"
+	</custom_item>
+	
+	<custom_item>
+		will add in IDFc
+	</custom_item>
+	
+	<custom_item>
+		type        : FILE_CONTENT_CHECK
+		description : "IHS_12 Check for Virtual Hosts in IBM HTTP Server"
+		info        : "Verifies that virtual hosts are configured in IBM HTTP Server."
+		file		: "/path/to/your/httpd.conf"
+		regex       : "<VirtualHost [^>]+>"
+		expect      : "<VirtualHost"
+	</custom_item>
+	
+	<custom_item>
+		type        : FILE_CONTENT_CHECK
+		description : "IHS_17 Check permissions on IBM HTTP Server document root"
+		info        : "Verifies that document root directories are not world-writable."
+		file        : "/opt/IBM/HTTPServer/htdocs"
+		expect      : "755"
+	</custom_item>
+
+
+
+
+
+
 
 </check_type>
