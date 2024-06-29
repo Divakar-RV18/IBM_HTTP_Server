@@ -1,0 +1,35 @@
+#!/bin/bash
+
+check_ssl_config(){
+# Path to your IBM HTTP Server httpd.conf file
+HTTPD_CONF="/path/to/your/httpd.conf"
+
+# Check if SSL is configured
+if grep -q "Listen 443 https" "$HTTPD_CONF"; then
+    echo "SSL is configured on port 443 - Pass"
+else
+    echo "SSL is not configured on port 443 - Fail"
+fi
+}
+#function to check override
+
+Check_override(){
+HTTPD_CONF="/path/to/your/httpd.conf"  # Path to your httpd.conf file
+
+# Check if AllowOverride is properly set to None for critical directives
+if grep -q "AllowOverride None" "$HTTPD_CONF"; then
+    echo "AllowOverride None is properly set in $HTTPD_CONF - Pass"
+else
+    echo "AllowOverride None is NOT set in $HTTPD_CONF - Fail"
+fi
+
+}
+
+
+check_ssl_config
+
+echo "-----------------"
+
+Check_override
+
+echo "-----------------"

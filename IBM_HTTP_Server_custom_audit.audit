@@ -1,0 +1,22 @@
+<check_type:"Unix">
+
+	<custom_item>
+		type: FILE_CONTENT_CHECK
+		description: "Check SSL configuration for admin wizard in IBM HTTP Server"
+		info: "Verifies SSL configuration settings in IBM HTTP Server's httpd.conf"
+		file: /path/to/your/httpd.conf
+		regex: true
+		expect: "^[\\s]*[Ll]isten+443+[Hh]ttps[\\s]*$"
+	</custom_item>
+	
+	<custom_item>
+		type: FILE_CONTENT_CHECK
+		description: "Check for proper AllowOverride settings in IBM HTTP Server"
+		info: "Verifies that critical system-wide settings cannot be overridden by users"
+		file: /path/to/your/httpd.conf
+		regex: true
+		expect: "^[\\s]*[Aa]llowOverride+[Nn]one[\\s]*$"
+		
+	</custom_item>
+
+</check_type>
